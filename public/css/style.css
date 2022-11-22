@@ -1,0 +1,116 @@
+body {
+    margin: 0px;
+    background-color: var(--light);
+}
+
+.header,
+.footer {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+.header {
+    position: fixed;
+    padding: 10px 15px;
+}
+
+.header .composing {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content {
+    z-index: -1;
+    padding-top: 70px;
+    margin-bottom: 70px;
+    display: flex;
+    justify-content: center;
+}
+
+.content .login .title {
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+.content .login .loginButton {
+    display: flex;
+    justify-content: space-around;
+}
+
+.content .home {
+    width: 100%;
+}
+
+.content .home .row.search.add {
+    justify-content: space-around;
+}
+
+.content .home .list table {
+    border: 1px solid var(--dark);
+    width: 80%;
+}
+
+.content .home .list table tr td {
+    border: 1px solid;
+    height: 40px;
+}
+
+
+.content .errorBlock {
+    width: 200px;
+    height: 150px;
+    background-color: #f26d6d;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light);
+    animation: disappear 4s forwards;
+}
+
+@keyframes disappear {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.content .errorBlock ul {
+    margin-top: 16px;
+    padding-left: 20px;
+}
+
+.content .errorBlock ul li {
+    font-size: 1rem;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    padding: 6px 15px;
+}
+
+.footer .composing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: var(--light);
+}
+
+a:hover {
+    text-decoration: none;
+}
