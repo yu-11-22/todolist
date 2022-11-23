@@ -7,11 +7,22 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    /**
+     * 登入頁介面
+     *
+     * @return void
+     */
     public function login()
     {
         return view('public.login');
     }
 
+    /**
+     * 登入驗證
+     *
+     * @param Request $request
+     * @return void
+     */
     public function check(Request $request)
     {
         $result = $this->validate($request, [
@@ -28,11 +39,22 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * 前台首頁
+     *
+     * @return void
+     */
     public function home()
     {
         return view('public.home');
     }
 
+    /**
+     * 登出重導向
+     *
+     * @param Request $request
+     * @return void
+     */
     public function logout(Request $request)
     {
         Auth::logout();

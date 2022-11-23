@@ -28,6 +28,15 @@ body {
     justify-content: center;
 }
 
+.content .hideBG {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.6;
+}
+
 .content .login .title {
     padding-top: 50px;
     padding-bottom: 30px;
@@ -42,8 +51,39 @@ body {
     width: 100%;
 }
 
-.content .home .row.search.add {
+.content .home .row.upper {
     justify-content: space-around;
+}
+
+.content .home .upper .add .addForm {
+    display: none;
+}
+
+.content .home .upper .add .addForm.show {
+    display: block;
+    border: 1px solid var(--dark);
+    z-index: 99;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 65%;
+    background-color: var(--light);
+}
+
+.content .home .upper .add .addForm {
+    font-size: 1.2rem;
+}
+
+.content .home .upper .add .addForm .add-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content .home .upper .add .addForm .add-content input[type=date] {
+    width: 16rem;
 }
 
 .content .home .list table {
@@ -54,8 +94,33 @@ body {
 .content .home .list table tr td {
     border: 1px solid;
     height: 40px;
+    text-align: center;
 }
 
+.content .home .list table tr td button {
+    background-color: inherit;
+}
+
+.content .home .list table tr td button:active,
+.content .home .list table tr td button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.content .home .list table tr td .dropdown-menu {
+    text-align: center;
+    min-width: 0;
+    padding: 0;
+}
+
+.content .home .list table tr td .dropdown-menu.show {
+    margin: -0.5rem 0 0 !important;
+    left: -0.7rem !important;
+}
+
+.content .home .list table tr td a {
+    color: var(--dark);
+}
 
 .content .errorBlock {
     width: 200px;

@@ -23,12 +23,12 @@
         <div class="loginInput">
             <div class="account">
                 <p>
-                    帳號：<input type="account" name="account">
+                    帳號：<input type="account" name="account" autofocus required>
                 </p>
             </div>
             <div class="password">
                 <p>
-                    密碼：<input type="password" name="password">
+                    密碼：<input type="password" name="password" required>
                 </p>
             </div>
         </div>
@@ -45,14 +45,4 @@
         </div>
     </form>
 </div>
-
-@if ($errors->any())
-<div class="errorBlock">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <h5><li>{{ $error }}</li></h5>
-        @endforeach
-    </ul>
-</div>
-@endif
 @endsection
