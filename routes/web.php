@@ -27,5 +27,5 @@ Route::middleware('guest:user')->group(function () {
 Route::fallback(function () {
     return back()->withErrors([
         'errors' => ['不存在的頁面！']
-    ]);;
+    ]);
 });

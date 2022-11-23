@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class doList extends Model
+class DoList extends Model
 {
     protected $table = 'dolists';
 }
