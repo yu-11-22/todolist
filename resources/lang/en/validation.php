@@ -31,7 +31,8 @@ return [
     ],
     'boolean'              => 'The :attribute field must be true or false.',
     'confirmed'            => 'The :attribute confirmation does not match.',
-    'date'                 => 'The :attribute is not a valid date.',
+    // 'date'                 => 'The :attribute is not a valid date.',
+    'date'                 => '不是有效的 :attribute',
     'date_format'          => 'The :attribute does not match the format :format.',
     'different'            => 'The :attribute and :other must be different.',
     'digits'               => 'The :attribute must be :digits digits.',
@@ -151,6 +152,10 @@ return [
         'account' => '帳號',
         'password' => '密碼',
         'g-recaptcha-response' => '驗證碼',
+        'task' => '待辦事項',
+        'description' => '事項記錄',
+        'operate_at' => '執行時間',
+        'complete_at' => '完成時間',
     ],
 
 ];
