@@ -19,10 +19,9 @@ class CreateDolistsTable extends Migration
             $table->foreign('user_id')
                 ->references('id')->on('users');
             $table->string('task', 50)->nullable(false);
-            $table->string('description', 200);
+            $table->string('description', 200)->nullable();
             $table->date('operate_at');
             $table->date('complete_at');
-            $table->unsignedInteger('delay')->default(0)->nullable(false);
             $table->tinyInteger('status')->default(3)->nullable(false);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('deleted_at')->useCurrent();

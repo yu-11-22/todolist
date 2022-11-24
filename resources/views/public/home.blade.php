@@ -7,9 +7,12 @@
     <a href="/">
         <h1>Todo List</h1>
     </a>
-    <a href="logout">
-        登出
-    </a>
+    <div>
+        <span class="mr-3">使用者： {{Auth::guard('user')->user()->account}}</span>
+        <a href="logout">
+            登出
+        </a>
+    </div>
 </div>
 @endsection
 
@@ -76,13 +79,15 @@
                 </tr>
             </thead>
             <tbody>
+                @if (count($list) > 0)
+                @foreach($list as $key => $val)
                 <tr>
-                    <td>1</td>
-                    <td>製作 side project</td>
-                    <td>目前正在製作首頁</td>
-                    <td>2022/11/18</td>
-                    <td>2022/11/25</td>
-                    <td>0 天</td>
+                    <td>{{$count += 1}}</td>
+                    <td>{{$val->task}}</td>
+                    <td>{{$val->description}}</td>
+                    <td>{{$val->operate_at}}</td>
+                    <td>{{$val->complete_at}}</td>
+                    <td>{{$delay}} 天</td>
                     <td>執行中</td>
                     <td>
                         <a href="#" class="mr-1">
@@ -93,6 +98,12 @@
                         </a>
                     </td>
                 </tr>
+                @endforeach
+                @else
+                <tr>
+                    <td colspan="8" style="height: 50vh; font-size: 5rem;">尚未新增任何待辦事項!!</td>
+                </tr>
+                @endif
             </tbody>
         </table>
     </div>

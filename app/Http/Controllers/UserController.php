@@ -36,32 +36,19 @@ class UserController extends Controller
     {
         // 自動驗證
         $validated = $this->validate($request, [
-            'account' => "required|min:6|max:20",
-            'password' => "required|min:6|max:20",
+            'account' => "required|string|min:6|max:20",
+            'password' => "required|string|min:6|max:20",
             'g-recaptcha-response' => 'required|captcha',
         ]);
         $inputArray = collect($validated)->except('g-recaptcha-response');
 
-        // 與 service 做登入驗證
-        $result = $this->userService->loginCheck($inputArray);
-
         // 與 Auth 做驗證
-        if (!Auth::guard('user')->attempt($inputArray->all()) || !$result) {
+        if (!Auth::guard('user')->attempt($inputArray->all())) {
             return redirect('login')->withErrors([
                 'errors' => ['帳號或密碼錯誤!']
             ]);
         };
         return redirect('/');
-    }
-
-    /**
-     * 前台首頁
-     *
-     * @return void
-     */
-    public function home()
-    {
-        return view('public.home');
     }
 
     /**

@@ -25,31 +25,31 @@ class UserService
         return $result;
     }
 
-    /**
-     * 與 user 表做登入驗證
-     *
-     * @param array $inputArray
-     * @return boolean
-     */
-    public function loginCheck($inputArray = [])
-    {
-        $result = false;
-        // 輸入的帳密
-        $account = collect($inputArray)->get('account');
-        $password = collect($inputArray)->get('password');
+    // /**
+    //  * 與 user 表做登入驗證
+    //  *
+    //  * @param array $inputArray
+    //  * @return boolean
+    //  */
+    // public function loginCheck($inputArray = [])
+    // {
+    //     $result = false;
+    //     // 輸入的帳密
+    //     $account = collect($inputArray)->get('account');
+    //     $password = collect($inputArray)->get('password');
 
-        // 資料表的帳密
-        $userData = $this->userRepository->selectByColumn('account', $account);
-        $userData = collect($userData)->first() ?? [];
-        $dataPassword = $userData['password'] ?? '';
+    //     // 資料表的帳密
+    //     $userData = $this->userRepository->selectByColumn('account', $account);
+    //     $userData = collect($userData)->first() ?? [];
+    //     $dataPassword = $userData['password'] ?? '';
 
-        // 確認密碼是否吻合
-        if (!Hash::check($password, $dataPassword)) {
-            $result = false;
-        } else {
-            $result = true;
-        }
+    //     // 確認密碼是否吻合
+    //     if (!Hash::check($password, $dataPassword)) {
+    //         $result = false;
+    //     } else {
+    //         $result = true;
+    //     }
 
-        return $result;
-    }
+    //     return $result;
+    // }
 }

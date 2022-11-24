@@ -18,7 +18,7 @@ Route::post('/login', 'UserController@check');
 
 Route::middleware('guest:user')->group(function () {
     // 待辦首頁
-    Route::get('/', 'UserController@home');
+    Route::get('/', 'ListController@home');
     // 送出待辦事項
     Route::post('/add', 'ListController@addList');
     // 登出重導向

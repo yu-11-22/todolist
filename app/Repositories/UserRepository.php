@@ -14,7 +14,7 @@ class UserRepository
     }
 
     /**
-     * 取得 user 表全部資料
+     * 取得 users 表全部資料
      *
      * @return void
      */
@@ -25,7 +25,7 @@ class UserRepository
     }
 
     /**
-     * 找 user 表中欄位與帶入參數相同的列
+     * 找 users 表中欄位與帶入參數相同的列
      *
      * @param string $column
      * @param string $input

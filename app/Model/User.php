@@ -8,6 +8,14 @@ class User extends Authenticatable
 {
     protected $table = 'users';
 
+    protected $fillable = [
+        'account',
+        'password',
+        'remember_token',
+    ];
+
+    public $timestamps = false;
+
     /**
      * 一對一關聯待辦事項模型
      *

@@ -41,6 +41,10 @@
 
 </html>
 <script>
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("operate_at")[0].setAttribute('min', today);
+    document.getElementsByName("complete_at")[0].setAttribute('min', today);
+
     function showAddForm() {
         var hideBG = document.getElementById("hideBG");
         var addForm = document.getElementById("addForm");
