@@ -13,6 +13,11 @@ class ListRepository
         $this->dolists = $dolists;
     }
 
+    /**
+     * 取得 doList 表全部資料
+     *
+     * @return void
+     */
     public function get()
     {
         $result = $this->dolists::all();
