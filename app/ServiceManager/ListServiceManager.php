@@ -34,10 +34,10 @@ class ListServiceManager
      *
      * @return void
      */
-    public function doListWithUser()
+    public function doListWithUser($order, $type)
     {
         $id = Auth::guard('user')->id();
-        $result = $this->listService->getById($id);
+        $result = $this->listService->getById($id, $order, $type);
         return $result;
     }
 }

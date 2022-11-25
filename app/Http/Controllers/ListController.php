@@ -23,12 +23,13 @@ class ListController extends Controller
      *
      * @return void
      */
-    public function home()
+    public function home($order = 'operate_at', $type = 'asc')
     {
         $count = 0;
-        $list = $this->listServiceManager->doListWithUser();
-        $listWithDelay = $this->listService->calDelayDay($list);
-        return view('public.home', compact(['listWithDelay', $listWithDelay], ['count', $count]));
+        $list = $this->listServiceManager->doListWithUser($order, $type);
+        $list = $this->listService->calDelayDay($list);
+        $list = $this->listService->calDayStatus($list);
+        return view('public.home', compact(['list', $list], ['count', $count]));
     }
 
     /**
@@ -52,5 +53,20 @@ class ListController extends Controller
             ]);
         };
         return redirect("/");
+    }
+
+    public function order()
+    {
+        $order = 'operate_at';
+        // $type = 'asc';
+        $orderCheck = 1;
+        if ($orderCheck) {
+            $type = 'desc';
+            $orderCheck -= 1;
+        } else {
+            $type = 'asc';
+            $orderCheck += 1;
+        }
+        return $this->home($order, $type);
     }
 }

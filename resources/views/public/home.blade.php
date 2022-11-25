@@ -63,9 +63,9 @@
                     <td width="5%">編號</td>
                     <td width="20%">待辦事項</td>
                     <td width="25%">事項記錄</td>
-                    <td width="12%">預計執行時間</td>
-                    <td width="12%">預計完成時間</td>
-                    <td width="8%">延誤時間</td>
+                    <td width="12%"><a href="operate_order">預計執行時間 <i class="fas fa-sort"></i></a></td>
+                    <td width="12%"><a href="#">預計完成時間 <i class="fas fa-sort"></i></a></td>
+                    <td width="8%"><a href="#">延誤時間 <i class="fas fa-sort"></i></a></td>
                     <td width="8%">
                         <div class="btn-group">
                             <button type="button" class="dropdown-toggle btn" data-toggle="dropdown">
@@ -82,8 +82,8 @@
                 </tr>
             </thead>
             <tbody>
-                @if (count($listWithDelay) > 0)
-                @foreach($listWithDelay as $key => $val)
+                @if (count($list) > 0)
+                @foreach($list as $key => $val)
                 <tr>
                     <td>{{$count += 1}}</td>
                     <td>{{$val['task']}}</td>
@@ -91,7 +91,7 @@
                     <td>{{$val['operate_at']}}</td>
                     <td>{{$val['complete_at']}}</td>
                     <td>{{$val['delay']}} 天</td>
-                    <td>執行中</td>
+                    <td>{{$val['statusResult']}}</td>
                     <td>
                         <a href="#" class="mr-1">
                             <i class='fas fa-edit'></i>

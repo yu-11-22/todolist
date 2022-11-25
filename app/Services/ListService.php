@@ -22,9 +22,9 @@ class ListService
      * @param integer $input
      * @return void
      */
-    public function getById($input = 0)
+    public function getById($input = 0, $order, $type)
     {
-        $result = $this->listRepository->selectByColumn('user_id', $input);
+        $result = $this->listRepository->selectByColumn('user_id', $input, $order, $type);
         return $result;
     }
 
@@ -80,11 +80,23 @@ class ListService
     /**
      * 執行時間更改狀態
      *
-     * @return void
+     * @param array $result
+     * @return array
      */
-    public function calDayStatus()
+    public function calDayStatus($result = [])
     {
-        $status = 3;
-        return $status;
+        $status = '';
+        $statusArray = [
+            1 => '已完成',
+            2 => '執行中',
+            3 => '待執行',
+        ];
+        $arr = collect($result)->map(function ($item) use (&$statusArray, &$status) {
+            $status = $item['status'] ?? $status;
+            $statusResult = ['statusResult' => $statusArray[$status]];
+            $collection = collect($item)->merge($statusResult);
+            return $collection;
+        });
+        return $arr;
     }
 }

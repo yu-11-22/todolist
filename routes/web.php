@@ -21,6 +21,8 @@ Route::middleware('guest:user')->group(function () {
     Route::get('/', 'ListController@home');
     // 送出待辦事項
     Route::post('/add', 'ListController@addList');
+    // 排序
+    Route::get('/operate_order', 'ListController@order');
     // 登出重導向
     Route::get('/logout', 'UserController@logout');
 });

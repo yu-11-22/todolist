@@ -31,9 +31,9 @@ class ListRepository
      * @param string $input
      * @return void
      */
-    public function selectByColumn($column = '', $input = '')
+    public function selectByColumn($column = '', $input = '', $orderCol = 'operate_at', $type = 'asc')
     {
-        $result = $this->dolists::where($column, $input)->get();
+        $result = $this->dolists::where($column, $input)->orderBy($orderCol, $type)->get();
         return $result;
     }
 
