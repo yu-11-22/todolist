@@ -27,8 +27,8 @@ class ListController extends Controller
     {
         $count = 0;
         $list = $this->listServiceManager->doListWithUser();
-        $delay = $this->listService->calDelayDay();
-        return view('public.home', compact(['list', $list], ['delay', $delay], ['count', $count]));
+        $listWithDelay = $this->listService->calDelayDay($list);
+        return view('public.home', compact(['listWithDelay', $listWithDelay], ['count', $count]));
     }
 
     /**

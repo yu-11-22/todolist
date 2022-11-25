@@ -20,6 +20,17 @@ body {
     align-items: center;
 }
 
+.header .composing button {
+    background-color: inherit;
+    color: var(--light);
+}
+
+.header .composing button:active,
+.header .composing button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 .content {
     z-index: -1;
     padding-top: 70px;

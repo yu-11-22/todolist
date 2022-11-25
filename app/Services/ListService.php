@@ -53,23 +53,28 @@ class ListService
      * 計算延遲天數
      *
      * @param array $result
-     * @return integer
+     * @return array
      */
-    public function calDelayDay()
+    public function calDelayDay($result = [])
     {
-        $delayDay = 0;
+        $delayDay = '';
+        $today = Carbon::now()->format('Y-m-d');
 
-        // $today = Carbon::now()->format('Y-m-d');
-        // $complete_at = collect($result)->get('complete_at');
-        // $completeDay = Carbon::parse($complete_at)->format('Y-m-d');
+        $arr = collect($result)->map(function ($item) use ($today, &$delayDay) {
+            $complete_at = $item['complete_at'];
+            $completeDay = Carbon::parse($complete_at)->format('Y-m-d');
+            // 完成日超過今天，延遲天數是 0 天
+            if ($completeDay >= $today) {
+                $delayDay = '0';
+            } else {
+                $delayDay = carbon::parse($completeDay)->diffInDays($today, true);
+            }
+            $delay = ['delay' => "$delayDay"];
+            $collection = collect($item)->merge($delay);
+            return $collection;
+        });
 
-        // // 完成日超過今天，延遲天數是 0 天
-        // if ($completeDay >= $today) {
-        //     $delayDay = 0;
-        // } else {
-        //     $delayDay = carbon::parse($completeDay)->diffInDays($today, true);
-        // }
-        return $delayDay;
+        return $arr;
     }
 
     /**

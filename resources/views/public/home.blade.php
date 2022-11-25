@@ -7,11 +7,14 @@
     <a href="/">
         <h1>Todo List</h1>
     </a>
-    <div>
-        <span class="mr-3">使用者： {{Auth::guard('user')->user()->account}}</span>
-        <a href="logout">
-            登出
-        </a>
+    <div class="btn-group">
+        <button type="button" class="dropdown-toggle btn" data-toggle="dropdown">
+            使用者： {{Auth::guard('user')->user()->account}}
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">會員管理</a>
+            <a class="dropdown-item" href="logout">登出</a>
+        </div>
     </div>
 </div>
 @endsection
@@ -79,15 +82,15 @@
                 </tr>
             </thead>
             <tbody>
-                @if (count($list) > 0)
-                @foreach($list as $key => $val)
+                @if (count($listWithDelay) > 0)
+                @foreach($listWithDelay as $key => $val)
                 <tr>
                     <td>{{$count += 1}}</td>
-                    <td>{{$val->task}}</td>
-                    <td>{{$val->description}}</td>
-                    <td>{{$val->operate_at}}</td>
-                    <td>{{$val->complete_at}}</td>
-                    <td>{{$delay}} 天</td>
+                    <td>{{$val['task']}}</td>
+                    <td>{{$val['description']}}</td>
+                    <td>{{$val['operate_at']}}</td>
+                    <td>{{$val['complete_at']}}</td>
+                    <td>{{$val['delay']}} 天</td>
                     <td>執行中</td>
                     <td>
                         <a href="#" class="mr-1">
