@@ -87,10 +87,16 @@ body {
     font-size: 1.2rem;
 }
 
+.content .home .upper .add .addForm form.add{
+    height: 100%;
+}
+
 .content .home .upper .add .addForm .add-content {
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
 }
 
 .content .home .upper .add .addForm .add-content input[type=date] {

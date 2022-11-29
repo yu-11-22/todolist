@@ -36,8 +36,7 @@ class ListService
      */
     public function createDoList($result = [])
     {
-        $status = $this->calDayStatus();
-        $collection = collect($result)->merge(['status' => $status]);
+        $collection = collect($result)->merge(['status' => '3']);
         DB::transaction(function () use ($collection) {
             $result = collect($collection)->only(['user_id', 'task', 'description', 'operate_at', 'complete_at', 'status'])->all();
             $result = $this->listRepository->store($result);

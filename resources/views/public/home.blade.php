@@ -25,23 +25,23 @@
         <div class="add">
             <button class="btn-dark" type="button" onclick="showAddForm()">新增事項</button>
             <div id="addForm" class="addForm">
-                <form action="/add" method="post">
+                <form class="add" action="/add" method="post">
                     @csrf
                     <div class="add-content">
-                        <div class="mt-5">
+                        <div>
                             新增事項：<input type="text" name="task" required>
                         </div>
-                        <div class="mt-5" style="display: flex;">
+                        <div style="display: flex;">
                             <span>事項記錄：</span>
                             <textarea name="description" cols="30" rows="6" style="resize:none;"></textarea>
                         </div>
-                        <div class="mt-5">
+                        <div>
                             預計執行日：<input type="date" name="operate_at" required>
                         </div>
-                        <div class="mt-4">
+                        <div>
                             預計完成日：<input type="date" name="complete_at" required>
                         </div>
-                        <div class="mt-5">
+                        <div>
                             <button class="btn-dark mr-5" type="submit">新增</button>
                             <button class="btn-dark ml-5" type="button" onclick="hideAddForm()">關閉</button>
                         </div>
