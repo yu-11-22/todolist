@@ -40,19 +40,13 @@ class ListController extends Controller
         $list = $this->listServiceManager->doListWithUser($this->order, $this->type) ?? [];
         // 加上延遲天數
         $list = $this->listService->calDelayDay($list) ?? [];
-        // 判斷狀態
+        // 數字改為狀態
         $list = $this->listService->calDayStatus($list) ?? [];
-        if (!is_null($status)) {
-            $condition = collect($list)->map(function ($item) use ($status) {
-                if ($item['status'] !== $status) {
-                    $item = null;
-                }
-                return $item;
-            })->filter(function ($val) {
-                return !is_null($val);
-            });
-            $list = $condition ?? [];
-        }
+        // 狀態不為 null 時的畫面處理
+        $list = $this->listService->statusNotNull($list, $status);
+        // 軟刪除的畫面處理
+        $list = $this->listService->notDeleted($list);
+
         return view('public.home', compact(['list', $list], ['count', $count], ['operate_at', $operate_at], ['complete_at', $complete_at]));
     }
 
@@ -137,12 +131,27 @@ class ListController extends Controller
             "operate_at" => "date",
             "complete_at" => "date|after:operate_at",
         ]);
-        $result = $this->listServiceManager->addUsersDoList($result);
-        if (!$result) {
+        if (is_null($result)) {
             return redirect('/')->withErrors([
-                'errors' => ['新增內容有誤']
+                'errors' => ['新增時發生錯誤!!']
             ]);
+        } else {
+            $this->listServiceManager->addUsersDoList($result);
+            return redirect("/");
         };
-        return redirect("/");
+    }
+
+    public function deleteList(Request $request)
+    {
+        $deletedId = $request->id;
+
+        if (is_null($deletedId)) {
+            return redirect('/')->withErrors([
+                'errors' => ['刪除時發生錯誤!!']
+            ]);
+        } else {
+            $this->listService->deleteUsersDoList($deletedId);
+            return redirect("/");
+        };
     }
 }

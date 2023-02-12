@@ -14,6 +14,7 @@ class DoList extends Model
         'description',
         'operate_at',
         'complete_at',
+        'deleted_at',
         'status',
     ];
 

@@ -48,4 +48,16 @@ class ListRepository
         $result = $this->dolists->create($params);
         return $result;
     }
+
+    /**
+     * 更新 dolists 表的資料
+     *
+     * @param [type] $deletedId
+     * @return void
+     */
+    public function update($deletedId, $deletedTime)
+    {
+        $result = $this->dolists->where('id', $deletedId)->update($deletedTime);
+        return $result;
+    }
 }

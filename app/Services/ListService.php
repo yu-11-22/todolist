@@ -49,6 +49,24 @@ class ListService
     }
 
     /**
+     * 取得 id 刪除資料
+     *
+     * @param [type] $deletedId
+     * @return void
+     */
+    public function deleteUsersDoList($deletedId)
+    {
+        $deletedTime = ['deleted_at' => Carbon::now()->format('Y-m-d H:i:s')];
+
+        DB::transaction(function () use ($deletedId, $deletedTime) {
+            $result = $this->listRepository->update($deletedId, $deletedTime);
+            if (!$result) {
+                DB::rollBack();
+            }
+        });
+    }
+
+    /**
      * 計算延遲天數
      *
      * @param array $result
@@ -97,5 +115,46 @@ class ListService
             return $collection;
         });
         return $arr;
+    }
+
+    /**
+     * // 狀態為 null 的事項，從 list 中移除
+     *
+     * @param [type] $list
+     * @param [type] $status
+     * @return void
+     */
+    public function statusNotNull($list, $status)
+    {
+        if (!is_null($status)) {
+            $condition = collect($list)->map(function ($item) use ($status) {
+                if ($item['status'] !== $status) {
+                    $item = null;
+                }
+                return $item;
+            })->filter(function ($val) {
+                return !is_null($val);
+            });
+            $list = $condition ?? [];
+        }
+        return $list;
+    }
+
+    /**
+     * 取得未刪除的資料
+     *
+     * @param [type] $list
+     * @return void
+     */
+    public function notDeleted($list)
+    {
+        $condition = collect($list)->map(function ($item) {
+            if (is_null($item['deleted_at'])) {
+                return $item;
+            }
+        })->filter(function ($val) {
+            return !is_null($val);
+        });
+        return $condition;
     }
 }

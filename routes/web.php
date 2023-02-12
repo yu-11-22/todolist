@@ -23,6 +23,8 @@ Route::middleware('guest:user')->group(function () {
     Route::get('/{parameter?}', 'ListController@home');
     // 送出待辦事項
     Route::post('/add', 'ListController@addList');
+    // 刪除代辦事項
+    Route::delete('/delete/{id}', 'ListController@deleteList');
 });
 Route::fallback(function () {
     return back()->withErrors([

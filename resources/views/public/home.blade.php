@@ -51,7 +51,7 @@
         </div>
         <div class="search">
             <form action="home" method="get">
-                <input type="text" name="search" value="">
+                <input type="text" name="search" value="" placeholder="搜尋事項">
                 <button class="btn-dark" type="submit">搜尋</button>
             </form>
         </div>
@@ -96,15 +96,17 @@
                         <a href="#" class="mr-1">
                             <i class='fas fa-edit'></i>
                         </a>
-                        <a href="#" class="ml-1">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                        <form class="inline" action="{{ url('/delete', ['id' => $val['id']]) }}" method="post">
+                            <button class="noBorder" type="submit" value="delete"><i class="fa fa-trash"></i></button>
+                            @method('delete')
+                            @csrf
+                        </form>
                     </td>
                 </tr>
                 @endforeach
                 @else
                 <tr>
-                    <td colspan="8" style="height: 50vh; font-size: 5rem;">尚未新增任何待辦事項!!</td>
+                    <td colspan="8" style="height: 50vh; font-size: 5rem;">沒有任何待辦事項!!</td>
                 </tr>
                 @endif
             </tbody>

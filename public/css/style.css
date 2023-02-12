@@ -93,6 +93,7 @@ body {
 
 .content .home .upper .add .addForm .add-content {
     height: 100%;
+    font-size: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -117,6 +118,14 @@ body {
 
 .content .home .list table tr td button {
     background-color: inherit;
+}
+
+.content .home .list table tr td .inline {
+    display: inline-block;
+}
+
+.content .home .list table tr td .noBorder {
+    border: none;
 }
 
 .content .home .list table tr td button:active,
