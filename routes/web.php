@@ -17,14 +17,12 @@ Route::get('/login', 'UserController@login');
 Route::post('/login', 'UserController@check');
 
 Route::middleware('guest:user')->group(function () {
-    // 待辦首頁
-    Route::get('/', 'ListController@home');
-    // 送出待辦事項
-    Route::post('/add', 'ListController@addList');
-    // 排序
-    Route::get('/operate_order', 'ListController@order');
     // 登出重導向
     Route::get('/logout', 'UserController@logout');
+    // 待辦首頁
+    Route::get('/{parameter?}', 'ListController@home');
+    // 送出待辦事項
+    Route::post('/add', 'ListController@addList');
 });
 Route::fallback(function () {
     return back()->withErrors([

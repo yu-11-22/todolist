@@ -87,7 +87,7 @@ body {
     font-size: 1.2rem;
 }
 
-.content .home .upper .add .addForm form.add{
+.content .home .upper .add .addForm form.add {
     height: 100%;
 }
 
@@ -112,6 +112,7 @@ body {
     border: 1px solid;
     height: 40px;
     text-align: center;
+    padding: 0.5rem;
 }
 
 .content .home .list table tr td button {

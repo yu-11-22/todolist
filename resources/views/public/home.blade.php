@@ -63,18 +63,18 @@
                     <td width="5%">編號</td>
                     <td width="20%">待辦事項</td>
                     <td width="25%">事項記錄</td>
-                    <td width="12%"><a href="operate_order">預計執行時間 <i class="fas fa-sort"></i></a></td>
-                    <td width="12%"><a href="#">預計完成時間 <i class="fas fa-sort"></i></a></td>
-                    <td width="8%"><a href="#">延誤時間 <i class="fas fa-sort"></i></a></td>
+                    <td width="12%"><a href="{{$operate_at}}">預計執行時間 <i class="fas fa-sort"></i></a></td>
+                    <td width="12%"><a href="{{$complete_at}}">預計完成時間 <i class="fas fa-sort"></i></a></td>
+                    <td width="8%">延誤時間</td>
                     <td width="8%">
                         <div class="btn-group">
                             <button type="button" class="dropdown-toggle btn" data-toggle="dropdown">
                                 狀態
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">待執行</a>
-                                <a class="dropdown-item" href="#">執行中</a>
-                                <a class="dropdown-item" href="#">已完成</a>
+                                <a class="dropdown-item" href="3">待執行</a>
+                                <a class="dropdown-item" href="2">執行中</a>
+                                <a class="dropdown-item" href="1">已完成</a>
                             </div>
                         </div>
                     </td>

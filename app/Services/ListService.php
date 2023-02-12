@@ -84,7 +84,7 @@ class ListService
      */
     public function calDayStatus($result = [])
     {
-        $status = '';
+        $status = '3';
         $statusArray = [
             1 => '已完成',
             2 => '執行中',

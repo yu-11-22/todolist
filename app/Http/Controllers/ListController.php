@@ -11,11 +11,17 @@ class ListController extends Controller
 {
     private $listService;
     private $listServiceManager;
+    private $order;
+    private $status;
+    private $type;
 
     public function __construct(ListService $listService, ListServiceManager $listServiceManager)
     {
         $this->listService = $listService;
         $this->listServiceManager = $listServiceManager;
+        $this->order = 'operate_at';
+        $this->type = 'asc';
+        $this->status = null;
     }
 
     /**
@@ -23,13 +29,98 @@ class ListController extends Controller
      *
      * @return void
      */
-    public function home($order = 'operate_at', $type = 'asc')
+    public function home(Request $request)
     {
+        // 事項筆數判斷
         $count = 0;
-        $list = $this->listServiceManager->doListWithUser($order, $type);
-        $list = $this->listService->calDelayDay($list);
-        $list = $this->listService->calDayStatus($list);
-        return view('public.home', compact(['list', $list], ['count', $count]));
+        $status = $this->status;
+        $this->order($request, $operate_at, $complete_at);
+        $this->statusSelect($request, $status);
+
+        $list = $this->listServiceManager->doListWithUser($this->order, $this->type) ?? [];
+        // 加上延遲天數
+        $list = $this->listService->calDelayDay($list) ?? [];
+        // 判斷狀態
+        $list = $this->listService->calDayStatus($list) ?? [];
+        if (!is_null($status)) {
+            $condition = collect($list)->map(function ($item) use ($status) {
+                if ($item['status'] !== $status) {
+                    $item = null;
+                }
+                return $item;
+            })->filter(function ($val) {
+                return !is_null($val);
+            });
+            $list = $condition ?? [];
+        }
+        return view('public.home', compact(['list', $list], ['count', $count], ['operate_at', $operate_at], ['complete_at', $complete_at]));
+    }
+
+    /**
+     * 執行與完成時間的排序判斷
+     *
+     * @return void
+     */
+    function order($request, &$operate_at, &$complete_at)
+    {
+        $operate_at = 'operate=desc';
+        $complete_at = 'complete=desc';
+
+        // 排序判斷
+        switch (true) {
+            case ($request->path() == 'operate=desc'):
+                $this->order = 'operate_at';
+                $this->type = 'desc';
+                $operate_at = '/operate=asc';
+                break;
+
+            case ($request->path() == 'operate=asc'):
+                $this->order = 'operate_at';
+                $this->type = 'asc';
+                $operate_at = '/operate=desc';
+                break;
+
+            case ($request->path() == 'complete=desc'):
+                $this->order = 'complete_at';
+                $this->type = 'desc';
+                $complete_at = '/complete=asc';
+                break;
+
+            case ($request->path() == 'complete=asc'):
+                $this->order = 'complete_at';
+                $this->type = 'asc';
+                $complete_at = '/complete=desc';
+                break;
+
+            default:
+                $this->order = 'operate_at';
+                $this->type = 'asc';
+        }
+    }
+
+    /**
+     * 狀態欄位的篩選
+     *
+     * @return void
+     */
+    function statusSelect($request, &$status)
+    {
+        switch (true) {
+            case ($request->path() == '3'):
+                $status = 3;
+                break;
+
+            case ($request->path() == '2'):
+                $status = 2;
+                break;
+
+            case ($request->path() == '1'):
+                $status = 1;
+                break;
+
+            default:
+                $status = null;
+        }
     }
 
     /**
@@ -53,20 +144,5 @@ class ListController extends Controller
             ]);
         };
         return redirect("/");
-    }
-
-    public function order()
-    {
-        $order = 'operate_at';
-        // $type = 'asc';
-        $orderCheck = 1;
-        if ($orderCheck) {
-            $type = 'desc';
-            $orderCheck -= 1;
-        } else {
-            $type = 'asc';
-            $orderCheck += 1;
-        }
-        return $this->home($order, $type);
     }
 }
